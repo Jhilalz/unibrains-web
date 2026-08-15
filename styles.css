@@ -152,6 +152,18 @@ section.block { padding: 70px 0; }
 .chat-widget b { display:block; font-size:0.92rem; line-height:1.25; }
 .chat-widget span { font-size:0.82rem; color: rgba(255,255,255,0.7); }
 
+/* Lead form */
+.lead-form { max-width: 680px; margin: 34px auto 0; background:#fff; border:1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }
+.lead-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.lead-form label { display:block; font-size:0.85rem; font-weight:600; color:var(--ink); margin-bottom:14px; }
+.lead-form input, .lead-form textarea { width:100%; margin-top:6px; padding:11px 14px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:0.95rem; color:var(--ink); background:var(--cream-2); }
+.lead-form input:focus, .lead-form textarea:focus { outline:none; border-color:var(--forest); background:#fff; }
+.lead-form textarea { resize:vertical; }
+.lead-form .btn { margin-top:6px; }
+.lead-note { margin-top:14px; font-size:0.85rem; color:var(--muted); }
+.lead-note a { color:var(--forest); font-weight:600; }
+@media (max-width: 620px){ .lead-row { grid-template-columns:1fr; } }
+
 /* Legal */
 .legal { padding: 60px 0; max-width: 760px; }
 .legal h1 { font-size: 2rem; margin-bottom: 8px; }
