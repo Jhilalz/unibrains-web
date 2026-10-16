@@ -258,7 +258,7 @@
   footer { border-top: 1px solid var(--line); padding: 46px 0 40px; color: var(--muted); }
   .foot-grid { display: grid; gap: 28px; grid-template-columns: 1fr; }
   @media (min-width: 760px){ .foot-grid{ grid-template-columns: 1.4fr 1fr 1fr 1fr;} }
-  footer h4 { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin: 0 0 12px; }
+  footer h3 { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin: 0 0 12px; font-weight: 700; }
   footer a { display: block; color: var(--muted); font-size: 14.5px; padding: 4px 0; }
   footer a:hover { color: var(--brand); }
   .foot-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; font-size: 13px; color: var(--faint); }
@@ -383,6 +383,9 @@
     .job .sector { background:#272c57; color:#c7d2fe; }
     .chip.on { background:#272c57; color:#c7d2fe; }
     .logo-slot { color:#9aa0b4; }
+    /* P3.15: Link-Indigo auf dunklem Grund aufhellen (Brand #4f46e5 = nur 2,9:1, unter AA) */
+    nav.links a.active { color:#a5b4fc; }
+    .job .apply { color:#a5b4fc; }
   }</style>
 <!-- P2.10: FAQPage strukturierte Daten. TODO: Antworten an die final bestätigten Fakten anpassen. -->
 <script type="application/ld+json">
@@ -705,9 +708,9 @@
         </a>
         <p style="max-width:34ch">Vermittlung internationaler Fach- und Nachwuchskräfte nach Deutschland — von der Bewerbung bis zum ersten Arbeitstag.</p>
       </div>
-      <div><h4>Für Bewerber</h4><a href="#jobs">Stellen finden</a><a href="#how">So funktioniert’s</a><a href="#services">Umzugsservices</a><a href="#services">Deutschkurse</a></div>
-      <div><h4>Für Arbeitgeber</h4><a href="/arbeitgeber.html">Fachkräfte finden</a><a href="#preise">Preise</a><a href="#beratung">Beratung buchen</a></div>
-      <div><h4>Unternehmen</h4><a href="mailto:kontakt@unibrains.de">Kontakt</a><a href="https://wa.me/491728332721">WhatsApp</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+      <div><h3>Für Bewerber</h3><a href="#jobs">Stellen finden</a><a href="#how">So funktioniert’s</a><a href="#services">Umzugsservices</a><a href="#services">Deutschkurse</a></div>
+      <div><h3>Für Arbeitgeber</h3><a href="/arbeitgeber.html">Fachkräfte finden</a><a href="#preise">Preise</a><a href="#beratung">Beratung buchen</a></div>
+      <div><h3>Unternehmen</h3><a href="mailto:kontakt@unibrains.de">Kontakt</a><a href="https://wa.me/491728332721">WhatsApp</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
     </div>
     <div class="foot-legal">
       <span>© 2026 Unibrains GmbH, Hanau</span>
