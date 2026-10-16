@@ -1,0 +1,33 @@
+{
+  "_comment": "i18n-Grundgerüst (P2.14). DE komplett, EN übersetzt. FR/AR sind TODO-Platzhalter — durch echte Übersetzungen ersetzen. AR wird mit dir=rtl gerendert. Keys = data-i18n-Attribute im HTML.",
+  "de": {
+    "navHome": "Startseite", "navEmployers": "Für Arbeitgeber", "navJobs": "Stellen", "navServices": "Umzugsservices", "navHow": "So funktioniert’s", "navPrices": "Preise",
+    "heroH1a": "Finden Sie Ihren nächsten", "heroH1b": "Job in Deutschland",
+    "heroLede": "Geprüfte Stellen mit Visum-Unterstützung, finanziertem Umzug und Deutschkursen. Sie sagen Ja — wir übernehmen den Papierkram.",
+    "audJob": "Ich suche einen Job", "audEmployers": "Ich suche Fachkräfte",
+    "searchQ": "Jobtitel, Beruf oder Stichwort", "searchOrt": "Land oder Stadt", "searchBtn": "Jobs suchen",
+    "chipsLbl": "Beliebt:", "headerLogin": "Anmelden", "headerCta": "Jetzt bewerben"
+  },
+  "en": {
+    "navHome": "Home", "navEmployers": "For employers", "navJobs": "Jobs", "navServices": "Relocation services", "navHow": "How it works", "navPrices": "Pricing",
+    "heroH1a": "Find your next", "heroH1b": "job in Germany",
+    "heroLede": "Vetted jobs with visa support, funded relocation and German courses. You say yes — we handle the paperwork.",
+    "audJob": "I'm looking for a job", "audEmployers": "I'm hiring",
+    "searchQ": "Job title, profession or keyword", "searchOrt": "Country or city", "searchBtn": "Search jobs",
+    "chipsLbl": "Popular:", "headerLogin": "Sign in", "headerCta": "Apply now"
+  },
+  "fr": {
+    "navHome": "TODO", "navEmployers": "TODO", "navJobs": "TODO", "navServices": "TODO", "navHow": "TODO", "navPrices": "TODO",
+    "heroH1a": "TODO", "heroH1b": "TODO", "heroLede": "TODO: traduction française",
+    "audJob": "TODO", "audEmployers": "TODO",
+    "searchQ": "TODO", "searchOrt": "TODO", "searchBtn": "TODO",
+    "chipsLbl": "TODO", "headerLogin": "TODO", "headerCta": "TODO"
+  },
+  "ar": {
+    "navHome": "TODO", "navEmployers": "TODO", "navJobs": "TODO", "navServices": "TODO", "navHow": "TODO", "navPrices": "TODO",
+    "heroH1a": "TODO", "heroH1b": "TODO", "heroLede": "TODO: الترجمة العربية",
+    "audJob": "TODO", "audEmployers": "TODO",
+    "searchQ": "TODO", "searchOrt": "TODO", "searchBtn": "TODO",
+    "chipsLbl": "TODO", "headerLogin": "TODO", "headerCta": "TODO"
+  }
+}
