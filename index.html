@@ -321,6 +321,7 @@
   .burger { display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:11px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; box-shadow:var(--shadow-sm); }
   .burger:hover { color:var(--brand); border-color:color-mix(in srgb,var(--brand) 45%,var(--line)); }
   .mmenu { display:flex; flex-direction:column; gap:2px; padding:8px 22px 16px; border-top:1px solid var(--line); background:var(--surface); }
+  .mmenu[hidden] { display:none; }
   .mmenu a { padding:12px 10px; border-radius:10px; font-weight:600; color:var(--ink); font-size:15px; }
   .mmenu a:hover { background:color-mix(in srgb,var(--ink) 5%,transparent); color:var(--brand); }
   @media (min-width:900px){ .burger{ display:none; } .mmenu{ display:none !important; } }
