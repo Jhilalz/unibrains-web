@@ -257,7 +257,40 @@
   @media (prefers-reduced-transparency: reduce) {
     header.nav { background: var(--surface); backdrop-filter: none; }
   }
-.cta::after{pointer-events:none}.cta .row{position:relative;z-index:2}.cta .btn{position:relative;z-index:2}</style>
+.cta::after{pointer-events:none}.cta .row{position:relative;z-index:2}.cta .btn{position:relative;z-index:2}
+
+  /* ===== A11y helpers (P3.17) ===== */
+  .vh { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+  .skip-link { position:absolute; left:-9999px; top:0; z-index:100; background:var(--brand); color:#fff; padding:10px 16px; border-radius:0 0 10px 0; font-weight:700; }
+  .skip-link:focus { left:0; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+    outline:3px solid color-mix(in srgb, var(--brand) 55%, transparent); outline-offset:2px; border-radius:8px;
+  }
+
+  /* chips as buttons (P1.2) */
+  .chip { font-family: inherit; cursor: pointer; }
+  .chip.on { color: var(--brand); border-color: color-mix(in srgb,var(--brand) 55%,var(--line)); background: var(--brand-soft); }
+
+  /* jobs meta (P1.4 / P2.13) */
+  .jobs-info { margin-top: 12px; color: var(--muted); font-size: .98rem; }
+  .jobs-empty { margin-top: 24px; text-align:center; color: var(--muted); font-size: 1.02rem; }
+  .jobs-empty a { color: var(--brand); font-weight: 700; }
+  .jobs-more { margin-top: 28px; text-align: center; }
+  .job .sector { display:inline-flex; align-items:center; gap:6px; align-self:flex-start; font-size:12px; font-weight:700; letter-spacing:.02em;
+    color:var(--brand-600); background:var(--brand-soft); padding:4px 10px; border-radius:999px; }
+
+  /* prices (P1.3) */
+  .prices { margin-top: 36px; display:grid; gap:16px; grid-template-columns:1fr; }
+  @media (min-width:720px){ .prices{ grid-template-columns:repeat(2,1fr);} }
+  .price { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:10px; }
+  .price.featured { border-color: color-mix(in srgb,var(--brand) 40%,var(--line)); box-shadow:var(--shadow-md); }
+  .price-amt { font-size:2.1rem; font-weight:800; letter-spacing:-.02em; }
+  .price-sub { color:var(--muted); font-size:.96rem; }
+  .price-list { margin:6px 0 16px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .price-list li { position:relative; padding-left:26px; color:var(--ink); font-size:.96rem; }
+  .price-list li::before { content:""; position:absolute; left:0; top:4px; width:16px; height:16px; border-radius:50%; background:var(--brand-soft);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; }
+  .price .btn { margin-top:auto; align-self:flex-start; }</style>
 </head>
 <body>
 
@@ -287,34 +320,39 @@
   <section class="hero">
     <div class="wrap">
       <div class="badge reveal">
-        <span class="dots"><i></i><i></i><i></i></span>
-        🇩🇪 100+ Fachkräfte ziehen jeden Monat nach Deutschland
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <!-- P1.5: Unbelegte Zahl entfernt. Echte Kennzahl via window.UNIBRAINS_STATS unten eintragbar. -->
+        <span id="heroBadgeText">🇩🇪 Ihr Weg nach Deutschland — mit Visum, Anerkennung &amp; Umzug</span>
       </div>
       <h1 class="reveal">Finden Sie Ihren nächsten<br><span class="grad">Job in Deutschland</span></h1>
-      <p class="lede reveal">Tausende Stellen mit Visum-Sponsoring, finanziertem Umzug und Deutschkursen.
+      <p class="lede reveal" id="heroLede">Geprüfte Stellen mit Visum-Unterstützung, finanziertem Umzug und Deutschkursen.
         Sie sagen Ja — wir übernehmen den Papierkram.</p>
 
-      <form class="search reveal" action="https://relocate.unibrains.de/" method="get">
+      <!-- P1.1: Suche filtert jetzt clientseitig die Stellenliste (statt Redirect auf das interne Tool). -->
+      <form class="search reveal" id="jobSearch" role="search" aria-label="Stellensuche">
         <label class="field">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          <input name="q" placeholder="Jobtitel, Beruf oder Stichwort" />
+          <span class="vh">Jobtitel, Beruf oder Stichwort</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="qInput" name="q" placeholder="Jobtitel, Beruf oder Stichwort" autocomplete="off" />
         </label>
         <label class="field">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <input name="ort" placeholder="Land oder Stadt" />
+          <span class="vh">Land oder Stadt</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <input id="ortInput" name="ort" placeholder="Land oder Stadt" autocomplete="off" />
         </label>
         <button class="btn btn-primary" type="submit">Jobs suchen</button>
       </form>
 
+      <!-- P1.2: Chips setzen den Suchbegriff und filtern die Liste. -->
       <div class="chips reveal">
         <span class="lbl">Beliebt:</span>
-        <a class="chip" href="#jobs">Pflegefachkraft</a>
-        <a class="chip" href="#jobs">Betreuungskraft</a>
-        <a class="chip" href="#jobs">Schweißer</a>
-        <a class="chip" href="#jobs">Elektriker</a>
-        <a class="chip" href="#jobs">LKW-Fahrer</a>
-        <a class="chip" href="#jobs">IT</a>
-        <a class="chip" href="#jobs">Hotelpersonal</a>
+        <button class="chip" type="button" data-q="Pflegefachkraft">Pflegefachkraft</button>
+        <button class="chip" type="button" data-q="Betreuungskraft">Betreuungskraft</button>
+        <button class="chip" type="button" data-q="Schweißer">Schweißer</button>
+        <button class="chip" type="button" data-q="Elektriker">Elektriker</button>
+        <button class="chip" type="button" data-q="LKW">LKW-Fahrer</button>
+        <button class="chip" type="button" data-q="IT">IT</button>
+        <button class="chip" type="button" data-q="Hotel">Hotelpersonal</button>
       </div>
 
       <div class="trust reveal">
@@ -366,32 +404,56 @@
     <div class="wrap">
       <div class="sec-head center reveal">
         <span class="eyebrow">Aktuelle Stellen</span>
-        <h2>Stellen mit Visum & Umzug</h2>
+        <h2>Stellen mit Visum &amp; Umzug</h2>
+        <p id="jobsInfo" class="jobs-info" aria-live="polite"></p>
       </div>
-      <div class="jobs">
-        <div class="job reveal">
-          <span class="flag">🇩🇪</span>
-          <h3>Elektroniker/in — Energie- & Gebäudetechnik</h3>
-          <span class="meta">Unibrains-Partner · Nürnberg, DE</span>
-          <span class="sal">38.000–46.000 € / Jahr</span>
-          <div class="tags"><span>Visa-Unterstützung</span><span>Anerkennungshilfe</span><span>Deutschkurs</span></div>
-          <a class="apply" href="https://bewerben.unibrains.de">Jetzt bewerben →</a>
+      <!-- P1.4: Stellen werden aus data/jobs.json gerendert; Suche/Chips filtern diese Liste. -->
+      <div class="jobs" id="jobsList"></div>
+      <p class="jobs-empty" id="jobsEmpty" hidden>
+        Keine Treffer für Ihre Suche —
+        <a href="https://bewerben.unibrains.de/?utm_source=unibrains-de&amp;from=no-results">jetzt Initiativbewerbung starten →</a>
+      </p>
+      <noscript>
+        <p class="jobs-info">Für die interaktive Stellenliste wird JavaScript benötigt. <a href="https://bewerben.unibrains.de/">Direkt bei Unibrains bewerben →</a></p>
+      </noscript>
+      <div class="jobs-more">
+        <a class="btn btn-ghost" href="https://bewerben.unibrains.de/?utm_source=unibrains-de">Alle Stellen ansehen →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preise (P1.3: #preise existierte nicht und war ein toter Link) -->
+  <section class="block" id="preise" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Preise</span>
+        <h2>Transparent &amp; fair</h2>
+        <p>Für Bewerber kostenlos. Für Arbeitgeber erfolgsorientiert — Sie zahlen für Ergebnisse.</p>
+      </div>
+      <div class="prices">
+        <div class="price reveal">
+          <span class="eyebrow">Für Bewerber</span>
+          <p class="price-amt">0&nbsp;€</p>
+          <p class="price-sub">Kostenlos für Fach- und Nachwuchskräfte.
+            <!-- TODO: Vom Team bestätigen lassen, dass die Vermittlung für Bewerber tatsächlich kostenlos ist. --></p>
+          <ul class="price-list">
+            <li>Vermittlung an geprüfte Arbeitgeber</li>
+            <li>Begleitung bei Visum &amp; Anerkennung</li>
+            <li>Unterstützung bei Deutschkurs &amp; Umzug</li>
+          </ul>
+          <a class="btn btn-primary" href="https://bewerben.unibrains.de/?utm_source=unibrains-de&amp;from=preise">Jetzt bewerben</a>
         </div>
-        <div class="job reveal">
-          <span class="flag">🇩🇪</span>
-          <h3>Pflegefachkraft (m/w/d)</h3>
-          <span class="meta">Unibrains-Partner · Frankfurt am Main, DE</span>
-          <span class="sal">36.000–44.000 € / Jahr</span>
-          <div class="tags"><span>Visa-Unterstützung</span><span>Fachsprache B2</span><span>Umzug</span></div>
-          <a class="apply" href="https://bewerben.unibrains.de">Jetzt bewerben →</a>
-        </div>
-        <div class="job reveal">
-          <span class="flag">🇩🇪</span>
-          <h3>Berufskraftfahrer/in — LKW (CE)</h3>
-          <span class="meta">Unibrains-Partner · Leipzig, DE</span>
-          <span class="sal">34.000–42.000 € / Jahr</span>
-          <div class="tags"><span>Visa-Unterstützung</span><span>Führerschein-Anerkennung</span><span>Deutschkurs</span></div>
-          <a class="apply" href="https://bewerben.unibrains.de">Jetzt bewerben →</a>
+        <div class="price reveal featured">
+          <span class="eyebrow">Für Arbeitgeber</span>
+          <p class="price-amt">Auf Anfrage</p>
+          <p class="price-sub">Erfolgsbasiertes Modell.
+            <!-- TODO: Echte Preis-/Konditionsinfos für Arbeitgeber ergänzen (z. B. Festpreis je Vermittlung oder Prozentsatz). --></p>
+          <ul class="price-list">
+            <li>Vorqualifizierte Kandidaten mit Anerkennung &amp; Sprache</li>
+            <li>Visum- &amp; Behörden-Handling durch Unibrains</li>
+            <li>Nachbetreuung bis in die Probezeit</li>
+          </ul>
+          <a class="btn btn-ghost" href="/arbeitgeber.html">Konditionen anfragen</a>
         </div>
       </div>
     </div>
@@ -422,7 +484,7 @@
         </a>
         <p style="max-width:34ch">Vermittlung internationaler Fach- und Nachwuchskräfte nach Deutschland — von der Bewerbung bis zum ersten Arbeitstag.</p>
       </div>
-      <div><h4>Für Bewerber</h4><a href="#jobs">Stellen finden</a><a href="#how">So funktioniert’s</a><a href="#services">Umzugsservices</a><a href="#">Deutschkurse</a></div>
+      <div><h4>Für Bewerber</h4><a href="#jobs">Stellen finden</a><a href="#how">So funktioniert’s</a><a href="#services">Umzugsservices</a><a href="#services">Deutschkurse</a></div>
       <div><h4>Für Arbeitgeber</h4><a href="/arbeitgeber.html">Fachkräfte finden</a><a href="#preise">Preise</a><a href="mailto:kontakt@unibrains.de?subject=Beratung%20Unibrains">Beratung buchen</a></div>
       <div><h4>Unternehmen</h4><a href="mailto:kontakt@unibrains.de">Kontakt</a><a href="https://wa.me/491728332721">WhatsApp</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
     </div>
@@ -456,6 +518,112 @@
     });
     items.forEach(el => io.observe(el));
   }
+</script>
+<script>
+/* ============ Stellen: laden, rendern, filtern (P1.1/P1.2/P1.4) ============ */
+(function () {
+  // P1.5: Echte, überprüfbare Kennzahlen hier eintragen (null = neutrale Formulierung, keine erfundene Zahl).
+  // TODO: Vom Team mit belegbaren Werten füllen.
+  const STATS = { monthlyPlacements: null, openJobsTotal: null };
+
+  const listEl = document.getElementById('jobsList');
+  const infoEl = document.getElementById('jobsInfo');
+  const emptyEl = document.getElementById('jobsEmpty');
+  const form = document.getElementById('jobSearch');
+  const qInput = document.getElementById('qInput');
+  const ortInput = document.getElementById('ortInput');
+  if (!listEl) return;
+
+  const norm = (s) => (s || '').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const esc = (s) => (s || '').toString().replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const eur = (n) => Number(n).toLocaleString('de-DE');
+
+  let JOBS = [];
+
+  const tagIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10V5a2 2 0 0 1 2-2h5l9 9-7 7-9-9Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>';
+
+  function card(j) {
+    const tags = (j.tags || []).map((t) => `<span>${esc(t)}</span>`).join('');
+    return `<article class="job">
+      <span class="flag" aria-hidden="true">${esc(j.flag || '🇩🇪')}</span>
+      <span class="sector">${tagIcon} ${esc(j.sector || 'Partnerbetrieb')} · ${esc(j.city || '')}</span>
+      <h3>${esc(j.title)}</h3>
+      <span class="meta">Unibrains-Partner · ${esc(j.city || '')}, ${esc(j.country || 'DE')}</span>
+      <span class="sal">${eur(j.salaryMin)}–${eur(j.salaryMax)} € / Jahr</span>
+      <div class="tags">${tags}</div>
+      <a class="apply" href="https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}&utm_source=unibrains-de">Jetzt bewerben →</a>
+    </article>`;
+  }
+
+  function matches(j, q, ort) {
+    const okQ = !q || [j.title, j.sector, ...(j.tags || []), ...(j.keywords || [])].some((f) => norm(f).includes(q));
+    const okOrt = !ort || norm(j.city).includes(ort) || norm(j.country).includes(ort);
+    return okQ && okOrt;
+  }
+
+  function render(q, ort) {
+    const qn = norm(q), ortN = norm(ort);
+    const filtered = JOBS.filter((j) => matches(j, qn, ortN));
+    listEl.innerHTML = filtered.map(card).join('');
+    emptyEl.hidden = filtered.length > 0;
+    const total = STATS.openJobsTotal;
+    if (q || ort) {
+      infoEl.textContent = `${filtered.length} von ${JOBS.length} Stellen passen zu Ihrer Suche.`;
+    } else {
+      infoEl.textContent = total ? `${total} offene Stellen · Auswahl unten.` : `${JOBS.length} ausgewählte Stellen.`;
+    }
+  }
+
+  function applySearch(scroll) {
+    render(qInput ? qInput.value : '', ortInput ? ortInput.value : '');
+    if (scroll) document.getElementById('jobs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // JobPosting-JSON-LD je Stelle (P3.18). TODO: echte description/datePosted/validThrough pflegen.
+  function injectJsonLd() {
+    const today = new Date().toISOString().slice(0, 10);
+    const graph = JOBS.map((j) => ({
+      '@context': 'https://schema.org/', '@type': 'JobPosting',
+      title: j.title, description: `${j.title} bei einem Unibrains-Partner in ${j.city}. Mit Visum-Unterstützung, Anerkennung, Deutschkurs und begleitetem Umzug.`,
+      datePosted: today, employmentType: j.employmentType || 'FULL_TIME', directApply: true,
+      identifier: { '@type': 'PropertyValue', name: 'Unibrains', value: j.id },
+      hiringOrganization: { '@type': 'Organization', name: 'Unibrains GmbH', sameAs: 'https://unibrains.de' },
+      jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: j.city, addressCountry: j.country || 'DE' } },
+      baseSalary: { '@type': 'MonetaryAmount', currency: 'EUR', value: { '@type': 'QuantitativeValue', minValue: j.salaryMin, maxValue: j.salaryMax, unitText: 'YEAR' } },
+      url: `https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}`,
+    }));
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(graph);
+    document.head.appendChild(s);
+  }
+
+  // Suche
+  if (form) form.addEventListener('submit', (e) => { e.preventDefault(); applySearch(true); });
+  if (qInput) qInput.addEventListener('input', () => applySearch(false));
+  if (ortInput) ortInput.addEventListener('input', () => applySearch(false));
+
+  // Chips
+  document.querySelectorAll('.chips .chip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (qInput) qInput.value = btn.dataset.q || btn.textContent.trim();
+      document.querySelectorAll('.chips .chip').forEach((b) => b.classList.toggle('on', b === btn));
+      applySearch(true);
+    });
+  });
+
+  fetch('data/jobs.json', { cache: 'no-cache' })
+    .then((r) => r.json())
+    .then((data) => {
+      JOBS = (data && data.jobs) || [];
+      render('', '');
+      injectJsonLd();
+    })
+    .catch(() => {
+      listEl.innerHTML = '';
+      if (infoEl) infoEl.innerHTML = 'Stellen konnten nicht geladen werden. <a href="https://bewerben.unibrains.de/">Direkt bewerben →</a>';
+    });
+})();
 </script>
 <script src="https://os.unibrains.de/widget/sana.js" defer></script>
 </body>

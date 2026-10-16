@@ -1,0 +1,109 @@
+{
+  "_comment": "Beispielstellen. TODO: durch echte offene Stellen ersetzen bzw. aus dem internen Tool exportieren. id wird als ?job=<id> an bewerben.unibrains.de übergeben.",
+  "jobs": [
+    {
+      "id": "pflege-ffm-01",
+      "title": "Pflegefachkraft (m/w/d)",
+      "sector": "Klinik",
+      "city": "Frankfurt am Main",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 36000,
+      "salaryMax": 44000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Fachsprache B2", "Umzug"],
+      "keywords": ["pflege", "pflegefachkraft", "krankenpflege", "gesundheit"]
+    },
+    {
+      "id": "betreuung-muc-01",
+      "title": "Betreuungskraft nach § 43b (m/w/d)",
+      "sector": "Pflegeheim",
+      "city": "München",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 28000,
+      "salaryMax": 34000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Deutschkurs", "Umzug"],
+      "keywords": ["betreuung", "betreuungskraft", "alltagsbegleiter", "pflege"]
+    },
+    {
+      "id": "schweisser-dus-01",
+      "title": "Schweißer/in (MAG/WIG)",
+      "sector": "Metallbau",
+      "city": "Düsseldorf",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 36000,
+      "salaryMax": 46000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Anerkennungshilfe", "Deutschkurs"],
+      "keywords": ["schweißer", "schweisser", "metall", "handwerk", "mag", "wig"]
+    },
+    {
+      "id": "elektriker-nue-01",
+      "title": "Elektroniker/in — Energie- & Gebäudetechnik",
+      "sector": "Elektrohandwerk",
+      "city": "Nürnberg",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 38000,
+      "salaryMax": 46000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Anerkennungshilfe", "Deutschkurs"],
+      "keywords": ["elektriker", "elektroniker", "elektro", "handwerk"]
+    },
+    {
+      "id": "lkw-lpz-01",
+      "title": "Berufskraftfahrer/in — LKW (CE)",
+      "sector": "Logistik",
+      "city": "Leipzig",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 34000,
+      "salaryMax": 42000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Führerschein-Anerkennung", "Deutschkurs"],
+      "keywords": ["lkw", "lkw-fahrer", "kraftfahrer", "fahrer", "logistik", "ce"]
+    },
+    {
+      "id": "it-ber-01",
+      "title": "Fachinformatiker/in — Systemintegration",
+      "sector": "IT & Software",
+      "city": "Berlin",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 42000,
+      "salaryMax": 55000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Umzug", "Deutschkurs"],
+      "keywords": ["it", "informatik", "fachinformatiker", "software", "systemintegration"]
+    },
+    {
+      "id": "hotel-ham-01",
+      "title": "Hotelfachkraft (m/w/d)",
+      "sector": "Hotellerie",
+      "city": "Hamburg",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 30000,
+      "salaryMax": 38000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Deutschkurs", "Umzug"],
+      "keywords": ["hotel", "hotelpersonal", "hotelfachkraft", "gastronomie", "service"]
+    },
+    {
+      "id": "pflege-koeln-01",
+      "title": "Pflegefachkraft Altenpflege (m/w/d)",
+      "sector": "Pflegedienst",
+      "city": "Köln",
+      "country": "DE",
+      "flag": "🇩🇪",
+      "salaryMin": 35000,
+      "salaryMax": 43000,
+      "employmentType": "FULL_TIME",
+      "tags": ["Visum-Unterstützung", "Fachsprache B2", "Umzug"],
+      "keywords": ["pflege", "altenpflege", "pflegefachkraft", "senioren"]
+    }
+  ]
+}
