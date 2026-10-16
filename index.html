@@ -6,6 +6,26 @@
 <title>Unibrains — Jobs in Deutschland mit Visum, Umzug & Anerkennung</title>
 <meta name="description" content="Finden Sie Ihren nächsten Job in Deutschland: Stellen mit Visum-Sponsoring, finanziertem Umzug, Anerkennung und Deutschkursen. Unibrains übernimmt den Papierkram." />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<!-- P3.18: SEO / Social -->
+<link rel="canonical" href="https://unibrains.de/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Unibrains" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:url" content="https://unibrains.de/" />
+<meta property="og:title" content="Unibrains — Jobs in Deutschland mit Visum, Umzug & Anerkennung" />
+<meta property="og:description" content="Geprüfte Stellen mit Visum-Unterstützung, finanziertem Umzug und Deutschkursen. Sie sagen Ja — wir übernehmen den Papierkram." />
+<!-- TODO: echtes Teaser-Bild (1200x630) unter /og-image.png hinterlegen. -->
+<meta property="og:image" content="https://unibrains.de/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Unibrains — Jobs in Deutschland mit Visum, Umzug & Anerkennung" />
+<meta name="twitter:description" content="Geprüfte Stellen mit Visum-Unterstützung, finanziertem Umzug und Deutschkursen." />
+<meta name="twitter:image" content="https://unibrains.de/og-image.png" />
+<!-- hreflang: Sprachumschaltung läuft aktuell clientseitig auf derselben URL.
+     TODO: für echte hreflang-Signale eigene URLs je Sprache (z. B. /en/, /fr/, /ar/) anlegen. -->
+<link rel="alternate" hreflang="de" href="https://unibrains.de/" />
+<link rel="alternate" hreflang="x-default" href="https://unibrains.de/" />
 <script>document.documentElement.classList.add('js')</script>
 <style>
   /* ============ Design tokens ============ */
@@ -20,8 +40,8 @@
     --surface: #ffffff;
     --surface-2: #ffffff;
     --ink: #0e1017;
-    --muted: #5b6070;
-    --faint: #8b90a0;
+    --muted: #4b5060;      /* P3.15: etwas dunkler für sicheren AA-Kontrast */
+    --faint: #6b7180;      /* P3.15: war #8b90a0 (~3:1, AA-Fail) → jetzt ~4.6:1 auf Weiß */
     --line: #e7e8ef;
     --glass: rgba(255,255,255,0.7);
     --glass-line: rgba(255,255,255,0.55);
@@ -247,8 +267,12 @@
   /* ============ Reveal on scroll ============ */
   /* Gated on .js so the page is fully visible without JavaScript (crawlers, no-JS,
      script errors) — the animation is a progressive enhancement, not a gate. */
-  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--spring); }
-  .js .reveal.in { opacity: 1; transform: none; }
+  /* P3.16: Elemente sind standardmäßig sichtbar; die Einblende-Animation läuft NUR,
+     wenn der Nutzer Bewegung zulässt (no-preference). */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--spring); }
+    .js .reveal.in { opacity: 1; transform: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
@@ -349,7 +373,16 @@
   .lead-row { display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
   .lead-alt { color:var(--muted); font-size:.92rem; }
   .lead-alt:hover { color:var(--brand); }
-  .lead-note { color:var(--faint); font-size:12.5px; }</style>
+  .lead-note { color:var(--faint); font-size:12.5px; }
+
+  /* P3.15: Kontrast für lila Tags/Chips/Badges im Dark-Mode (brand-600 auf dunklem brand-soft war zu dunkel) */
+  @media (prefers-color-scheme: dark) {
+    .job .tags span, .job .sector, .chip.on, .price-list li::before { }
+    .job .tags span { background:#272c57; color:#c7d2fe; }
+    .job .sector { background:#272c57; color:#c7d2fe; }
+    .chip.on { background:#272c57; color:#c7d2fe; }
+    .logo-slot { color:#9aa0b4; }
+  }</style>
 <!-- P2.10: FAQPage strukturierte Daten. TODO: Antworten an die final bestätigten Fakten anpassen. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -363,6 +396,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#top">Zum Inhalt springen</a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-row">
