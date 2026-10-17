@@ -780,14 +780,27 @@
 
   const tagIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10V5a2 2 0 0 1 2-2h5l9 9-7 7-9-9Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>';
 
+  const CTRY_NAME = { DE: 'Deutschland', DEUTSCHLAND: 'Deutschland', GERMANY: 'Deutschland', AT: 'Österreich', 'ÖSTERREICH': 'Österreich', CH: 'Schweiz', SCHWEIZ: 'Schweiz' };
+  const CTRY_CODE = { DEUTSCHLAND: 'DE', GERMANY: 'DE', 'ÖSTERREICH': 'AT', SCHWEIZ: 'CH' };
+  function countryName(c) { const u = (c || 'DE').toUpperCase(); return CTRY_NAME[u] || c || 'Deutschland'; }
+  function countryCode(c) { const u = (c || 'DE').toUpperCase(); return CTRY_CODE[u] || (u.length === 2 ? u : 'DE'); }
+  function salaryLine(j) {
+    const lo = Number(j.salaryMin) || 0, hi = Number(j.salaryMax) || 0;
+    if (!lo && !hi) return '';
+    const txt = lo && hi ? `${eur(lo)}–${eur(hi)}` : (hi ? `bis ${eur(hi)}` : `ab ${eur(lo)}`);
+    return `<span class="sal">${txt} € / Jahr</span>`;
+  }
+
   function card(j) {
     const tags = (j.tags || []).map((t) => `<span>${esc(t)}</span>`).join('');
+    const sector = esc(j.sector || 'Partnerbetrieb') + (j.city ? ' · ' + esc(j.city) : '');
+    const loc = [j.city, countryName(j.country)].filter(Boolean).map(esc).join(', ');
     return `<article class="job">
       <span class="flag" aria-hidden="true">${esc(j.flag || '🇩🇪')}</span>
-      <span class="sector">${tagIcon} ${esc(j.sector || 'Partnerbetrieb')} · ${esc(j.city || '')}</span>
+      <span class="sector">${tagIcon} ${sector}</span>
       <h3>${esc(j.title)}</h3>
-      <span class="meta">Unibrains-Partner · ${esc(j.city || '')}, ${esc(j.country || 'DE')}</span>
-      <span class="sal">${eur(j.salaryMin)}–${eur(j.salaryMax)} € / Jahr</span>
+      <span class="meta">Unibrains-Partner${loc ? ' · ' + loc : ''}</span>
+      ${salaryLine(j)}
       <div class="tags">${tags}</div>
       <a class="apply" href="https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}&utm_source=unibrains-de">Jetzt bewerben →</a>
     </article>`;
@@ -820,16 +833,22 @@
   // JobPosting-JSON-LD je Stelle (P3.18). TODO: echte description/datePosted/validThrough pflegen.
   function injectJsonLd() {
     const today = new Date().toISOString().slice(0, 10);
-    const graph = JOBS.map((j) => ({
-      '@context': 'https://schema.org/', '@type': 'JobPosting',
-      title: j.title, description: `${j.title} bei einem Unibrains-Partner in ${j.city}. Mit Visum-Unterstützung, Anerkennung, Deutschkurs und begleitetem Umzug.`,
-      datePosted: today, employmentType: j.employmentType || 'FULL_TIME', directApply: true,
-      identifier: { '@type': 'PropertyValue', name: 'Unibrains', value: j.id },
-      hiringOrganization: { '@type': 'Organization', name: 'Unibrains GmbH', sameAs: 'https://unibrains.de' },
-      jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: j.city, addressCountry: j.country || 'DE' } },
-      baseSalary: { '@type': 'MonetaryAmount', currency: 'EUR', value: { '@type': 'QuantitativeValue', minValue: j.salaryMin, maxValue: j.salaryMax, unitText: 'YEAR' } },
-      url: `https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}`,
-    }));
+    const graph = JOBS.map((j) => {
+      const where = j.city ? ` in ${j.city}` : ' in Deutschland';
+      const posting = {
+        '@context': 'https://schema.org/', '@type': 'JobPosting',
+        title: j.title, description: `${j.title} bei einem Unibrains-Partner${where}. Mit Visum-Unterstützung, Anerkennung, Deutschkurs und begleitetem Umzug.`,
+        datePosted: today, employmentType: j.employmentType || 'FULL_TIME', directApply: true,
+        identifier: { '@type': 'PropertyValue', name: 'Unibrains', value: j.id },
+        hiringOrganization: { '@type': 'Organization', name: 'Unibrains GmbH', sameAs: 'https://unibrains.de' },
+        jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: j.city || undefined, addressCountry: countryCode(j.country) } },
+        url: `https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}`,
+      };
+      if (j.salaryMin || j.salaryMax) {
+        posting.baseSalary = { '@type': 'MonetaryAmount', currency: 'EUR', value: { '@type': 'QuantitativeValue', minValue: j.salaryMin || undefined, maxValue: j.salaryMax || undefined, unitText: 'YEAR' } };
+      }
+      return posting;
+    });
     const s = document.createElement('script');
     s.type = 'application/ld+json';
     s.textContent = JSON.stringify(graph);
