@@ -850,17 +850,33 @@
     });
   });
 
-  fetch('data/jobs.json', { cache: 'no-cache' })
-    .then((r) => r.json())
+  // P4: Stellen vom Live-Feed (RelocateOS) laden; Fallback auf die mitgelieferte
+  // data/jobs.json, wenn der Feed leer oder nicht erreichbar ist.
+  const FEED_URL = 'https://os.unibrains.de/api/public-jobs';
+  function useJobs(list) {
+    JOBS = Array.isArray(list) ? list : [];
+    render('', '');
+    injectJsonLd();
+  }
+  function loadLocal() {
+    return fetch('data/jobs.json', { cache: 'no-cache' })
+      .then((r) => r.json())
+      .then((data) => (data && data.jobs) || []);
+  }
+  fetch(FEED_URL, { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error('feed'))))
     .then((data) => {
-      JOBS = (data && data.jobs) || [];
-      render('', '');
-      injectJsonLd();
+      const jobs = (data && data.jobs) || [];
+      return jobs.length ? useJobs(jobs) : loadLocal().then(useJobs);
     })
-    .catch(() => {
-      listEl.innerHTML = '';
-      if (infoEl) infoEl.innerHTML = 'Stellen konnten nicht geladen werden. <a href="https://bewerben.unibrains.de/">Direkt bewerben →</a>';
-    });
+    .catch(() =>
+      loadLocal()
+        .then(useJobs)
+        .catch(() => {
+          listEl.innerHTML = '';
+          if (infoEl) infoEl.innerHTML = 'Stellen konnten nicht geladen werden. <a href="https://bewerben.unibrains.de/">Direkt bewerben →</a>';
+        }),
+    );
 })();
 </script>
 <script>
