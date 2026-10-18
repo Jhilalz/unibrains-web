@@ -802,7 +802,7 @@
       <span class="meta">Unibrains-Partner${loc ? ' · ' + loc : ''}</span>
       ${salaryLine(j)}
       <div class="tags">${tags}</div>
-      <a class="apply" href="https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}&utm_source=unibrains-de">Jetzt bewerben →</a>
+      <a class="apply" href="https://bewerben.unibrains.de/kandidat/registrieren?job=${encodeURIComponent(j.id)}&utm_source=unibrains-de">Jetzt bewerben →</a>
     </article>`;
   }
 
@@ -842,7 +842,7 @@
         identifier: { '@type': 'PropertyValue', name: 'Unibrains', value: j.id },
         hiringOrganization: { '@type': 'Organization', name: 'Unibrains GmbH', sameAs: 'https://unibrains.de' },
         jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: j.city || undefined, addressCountry: countryCode(j.country) } },
-        url: `https://bewerben.unibrains.de/?job=${encodeURIComponent(j.id)}`,
+        url: `https://bewerben.unibrains.de/kandidat/registrieren?job=${encodeURIComponent(j.id)}`,
       };
       if (j.salaryMin || j.salaryMax) {
         posting.baseSalary = { '@type': 'MonetaryAmount', currency: 'EUR', value: { '@type': 'QuantitativeValue', minValue: j.salaryMin || undefined, maxValue: j.salaryMax || undefined, unitText: 'YEAR' } };
