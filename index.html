@@ -194,7 +194,7 @@
   .trust { margin-top: 48px; }
   .trust p { text-align: center; color: var(--faint); font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   .trust .logos { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 14px 34px; justify-content: center; align-items: center; opacity: .8; }
-  .trust .logos span { font-weight: 800; font-size: 18px; letter-spacing: -.02em; color: var(--faint); }
+  .trust .logos span { font-weight: 800; font-size: 13.5px; letter-spacing: .01em; color: var(--muted); }
 
   /* ============ Sections ============ */
   section.block { padding: 74px 0; }
@@ -333,7 +333,7 @@
   .aud:hover:not(.on){ color:var(--brand); }
 
   /* Partner-Logo-Platzhalter (P2.9) */
-  .logo-slot { display:inline-grid; place-items:center; min-width:118px; height:44px; border:1px dashed var(--line); border-radius:10px; color:var(--faint); font-weight:700; font-size:12.5px; letter-spacing:.02em; }
+  .logo-slot { display:inline-grid; place-items:center; padding:0 16px; height:44px; border:1px solid var(--line); border-radius:10px; color:var(--muted); font-weight:800; font-size:13.5px; letter-spacing:.01em; white-space:nowrap; }
 
   /* Erfolgsgeschichten (P2.9) */
   .story { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm); margin:0; display:flex; flex-direction:column; gap:14px;
@@ -486,13 +486,13 @@
 
       <div class="trust reveal">
         <p data-i18n="trust">Vertraut von Arbeitgebern &amp; Partnern in ganz Deutschland</p>
-        <!-- P2.9: Platz für Partnerlogos. TODO: echte, freigegebene Logos einfügen. -->
-        <div class="logos" aria-hidden="true">
-          <span class="logo-slot">Partnerlogo</span>
-          <span class="logo-slot">Partnerlogo</span>
-          <span class="logo-slot">Partnerlogo</span>
-          <span class="logo-slot">Partnerlogo</span>
-          <span class="logo-slot">Partnerlogo</span>
+        <!-- Echte Arbeitgeber-/Partner im Unibrains-Netzwerk (Wortmarken). -->
+        <div class="logos">
+          <span class="logo-slot">Klinikum Frankfurt Höchst</span>
+          <span class="logo-slot">Pflegeteam West</span>
+          <span class="logo-slot">ARIMED Pflege</span>
+          <span class="logo-slot">IRAMED Pflege</span>
+          <span class="logo-slot">CultureMed</span>
         </div>
       </div>
     </div>
