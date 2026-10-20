@@ -53,24 +53,9 @@
     --ease: cubic-bezier(.2,0,0,1);
     --spring: cubic-bezier(.22,1.2,.36,1);
     --maxw: 1120px;
-    color-scheme: light dark;
+    color-scheme: light;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b0c10;
-      --surface: #14161d;
-      --surface-2: #191c24;
-      --ink: #f3f4f8;
-      --muted: #a4a9ba;
-      --faint: #767c90;
-      --line: #262a34;
-      --brand-soft: #1b1f3a;
-      --glass: rgba(18,20,27,0.6);
-      --glass-line: rgba(255,255,255,0.08);
-      --shadow-md: 0 10px 30px -10px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4);
-      --shadow-lg: 0 40px 80px -30px rgba(0,0,0,.7), 0 10px 30px -12px rgba(0,0,0,.5);
-    }
-  }
+  /* Dark-Mode deaktiviert — Seite immer im Hellmodus (Nutzer-Wunsch 20.10.). */
 
   /* ============ Reset & base ============ */
   * { box-sizing: border-box; }
@@ -376,17 +361,7 @@
   .lead-alt:hover { color:var(--brand); }
   .lead-note { color:var(--faint); font-size:12.5px; }
 
-  /* P3.15: Kontrast für lila Tags/Chips/Badges im Dark-Mode (brand-600 auf dunklem brand-soft war zu dunkel) */
-  @media (prefers-color-scheme: dark) {
-    .job .tags span, .job .sector, .chip.on, .price-list li::before { }
-    .job .tags span { background:#272c57; color:#c7d2fe; }
-    .job .sector { background:#272c57; color:#c7d2fe; }
-    .chip.on { background:#272c57; color:#c7d2fe; }
-    .logo-slot { color:#9aa0b4; }
-    /* P3.15: Link-Indigo auf dunklem Grund aufhellen (Brand #4f46e5 = nur 2,9:1, unter AA) */
-    nav.links a.active { color:#a5b4fc; }
-    .job .apply { color:#a5b4fc; }
-  }</style>
+  /* Dark-Mode-Overrides entfernt — Seite immer hell (Nutzer-Wunsch 20.10.). */</style>
 <!-- P2.10: FAQPage strukturierte Daten. TODO: Antworten an die final bestätigten Fakten anpassen. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
